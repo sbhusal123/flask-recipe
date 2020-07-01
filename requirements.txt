@@ -1,0 +1,3 @@
+Flask==1.1.2
+flask-orator==0.2.0 # ORM
+psycopg2==2.8.5 # postgres connector
