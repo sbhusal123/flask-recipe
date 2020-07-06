@@ -14,3 +14,11 @@ app.config.from_pyfile(config_file)
 
 # Configur Orator
 db = Orator(app)
+
+
+def register_blueprints(application):
+    from recipe.controllers import recipe
+    application.register_blueprint(recipe)
+
+
+register_blueprints(app)
