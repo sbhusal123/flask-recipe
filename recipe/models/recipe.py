@@ -7,5 +7,5 @@ class Recipe(Model):
     Model attributes: https://orator-orm.com/docs/0.9/orm.html#defining-fillable-attributes-on-a-model
     """
     __table__ = 'recipes'
-    __fillable__ = ['name']
+    __fillable__ = ['name', 'description']
 
