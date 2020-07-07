@@ -1,2 +1,4 @@
+from recipe.models.recipe import Recipe
+
 def index():
-    return "Hello world from controller buleprint, i'm recipe"
+    return f'- {Recipe.first().name}'
