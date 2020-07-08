@@ -8,4 +8,4 @@ class Recipe(Model):
     """
     __table__ = 'recipes'
     __fillable__ = ['name', 'description']
-
+    __timestamps__ = False

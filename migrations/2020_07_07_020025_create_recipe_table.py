@@ -14,7 +14,7 @@ class CreateRecipeTable(Migration):
             table.increments('id')
             table.string('name', 50).unique()
             table.string('description')
-            table.timestamps()
+            # table.timestamps()
 
     def down(self):
         """
