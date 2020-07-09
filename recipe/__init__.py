@@ -23,8 +23,9 @@ def register_blueprints(application):
     application.register_blueprint(recipe)
 
 def register_apis(application):
-    from recipe.api import recipe_api
+    from recipe.api import recipe_api, auth_api
     app.register_blueprint(recipe_api, url_prefix=prefix)
+    app.register_blueprint(auth_api, url_prefix=prefix)
 
 register_apis(app)
 register_blueprints(app)
