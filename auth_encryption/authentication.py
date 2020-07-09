@@ -1,6 +1,5 @@
-from flask import session, redirect, request, url_for
+from flask import request
 from orator.exceptions.orm import ModelNotFound
-from flask_login import login_user
 
 from functools import wraps
 import jwt
@@ -9,6 +8,8 @@ from auth_encryption.encryption import Encryption
 from recipe.models.user import User
 
 def auth(func):
+    """Authentication jwt middleware decorator/ token checker"""
+
 
     @wraps(func)
     def wrapped(*args, **kwargs):
@@ -31,7 +32,7 @@ def auth(func):
             encryption = Encryption()
             u = encryption.decrypt(j.get('username'))
 
-            # Check if 
+            # Check if user exists
             try:
                 user = User.where_username(u).first_or_fail()
             except ModelNotFound:
