@@ -30,8 +30,8 @@ class AuthLogin(Resource):
         try:
             encryption = Encryption()
 
-            # Generate JWT Bearer Token
-            token = jwt.encode({'hash': encryption.encrypt(str(user.id)), 'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=30)}, application.config['SECRET_KEY'])
+            # Generate JWT Bearer Token using username
+            token = jwt.encode({'hash': encryption.encrypt(str(user.username)), 'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=30)}, application.config['SECRET_KEY'])
             return {'token': token.decode('utf-8'), 'code': 200}, 200
         except Exception as e:
             print(e)

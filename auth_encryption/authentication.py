@@ -24,17 +24,17 @@ def auth(func):
         
         # If token valid, continue else throw exception
         try:
-            # Get the token, from the Authorization header
+            # Get the token, from the Authorization header and decode it
             token = bearer.split(" ")[1]
             j = jwt.decode(token, app.config['SECRET_KEY'])
 
             # Decrypt the token
             encryption = Encryption()
-            u = encryption.decrypt(j.get('username'))
+            username = encryption.decrypt(j.get('hash'))
 
-            # Check if user exists
+            # Check if user exists with hased username
             try:
-                user = User.where_username(u).first_or_fail()
+                user = User.where_username(username).first_or_fail()
             except ModelNotFound:
                 return {'message':'You are not authorized'}, 403
         except:

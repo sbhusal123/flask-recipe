@@ -6,16 +6,18 @@ from recipe.models.recipe import Recipe
 from helpers.utils import recipe_exists
 from orator.exceptions.query import QueryException
 
+from auth_encryption.authentication import auth
 from recipe.api.validators.recipe_validator import RecipeValidator
 
 
 class RecipeListApi(Resource):
 
-    
+
     def get(self):
         recipes = Recipe.all()
         return {'data': recipes.serialize()}, 200
 
+    @auth
     def post(self):
         data = RecipeValidator().validate()
         try:
@@ -32,6 +34,7 @@ class RecipeApi(Resource):
         recipe = Recipe.find(id)
         return {'data': recipe.serialize()}, 200
     
+    @auth    
     @recipe_exists
     def delete(self, id):
         recipe = Recipe.find(id)
@@ -41,6 +44,7 @@ class RecipeApi(Resource):
             return {'message': 'Unable to delete recipe'}, 422
         return {'message': 'Recipe deleted succesfully'}, 201
 
+    @auth
     @recipe_exists
     def put(self, id):
         recipe = Recipe.find(id)
