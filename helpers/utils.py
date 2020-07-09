@@ -14,6 +14,6 @@ def recipe_exists(func):
         try:
             Recipe.where('id', kwargs['id']).first_or_fail()
         except ModelNotFound:
-            return {'message': 'Recipe not found',}, 404
+            return {'message': 'Recipe not found'}, 404
         return func(self, *args, **kwargs)
     return inner_function
