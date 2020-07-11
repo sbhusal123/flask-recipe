@@ -6,10 +6,12 @@ omit =
     config/*
     migrations/*
     recipe/__init__.py
+    recipe/controllers/*
     seeds/*
     tests/*
     env/*
     main.py
+    auth_encryption/encryption.py
 
 [html]
 directory = coverage
