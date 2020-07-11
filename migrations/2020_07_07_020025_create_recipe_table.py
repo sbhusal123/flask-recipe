@@ -13,6 +13,7 @@ class CreateRecipeTable(Migration):
         with self.schema.create('recipes') as table:
             table.increments('id')
             table.string('name', 50).unique()
+            table.string('image')
             table.string('description')
             # table.timestamps()
 

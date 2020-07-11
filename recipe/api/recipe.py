@@ -9,6 +9,9 @@ from orator.exceptions.query import QueryException
 from auth_encryption.authentication import auth
 from recipe.api.validators.recipe_validator import RecipeValidator
 
+from werkzeug.utils import secure_filename
+import os
+from recipe import app
 
 class RecipeListApi(Resource):
 
@@ -20,8 +23,21 @@ class RecipeListApi(Resource):
     @auth
     def post(self):
         data = RecipeValidator().validate()
+
+        # Upload files
+        image = data.image
+        image_filename = secure_filename(image.filename)
+        image_path = os.path.join(app.config['UPLOAD_FOLDER'], image_filename)
         try:
-            recipe = Recipe.create(data)
+            image.save(image_path)
+        except Exception as e:
+            print(e)
+            print(image_path)
+            return {'message': 'Unale to upload file.'}, 422
+        data.pop('image')
+
+        try:
+            recipe = Recipe.create(data, image=image_filename)
         except QueryException as qe:
             return {'message': 'Recipe creation error'}, 422
         return {'data': recipe.serialize(), 'message': 'New recipe added succesfully.'}, 201

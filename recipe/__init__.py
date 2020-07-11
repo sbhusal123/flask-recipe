@@ -5,12 +5,17 @@ from flask import Flask
 from flask_orator import Orator
 import os
 
+# ROOT directory
+ROOT_DIR =os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+
 # Get config file
 config_file = os.getcwd() + "/config/development.cfg"
 
 # Setup and configure flask app from config file
 app = Flask(__name__, instance_relative_config=True)
 app.config.from_pyfile(config_file)
+app.config['UPLOAD_FOLDER'] = ROOT_DIR + app.config['UPLOAD_FOLDER']
 
 # Configur Orator
 db = Orator(app)

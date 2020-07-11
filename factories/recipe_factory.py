@@ -8,5 +8,6 @@ factory = Factory()
 def recipe_factory(faker):
     return {
         'name': faker.word(),
-        'description': faker.text()
+        'description': faker.text(),
+        'image': faker.word()
     }
