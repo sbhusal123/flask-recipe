@@ -1,0 +1,15 @@
+[run]
+omit =
+    coverage/*
+    env/*
+    factories/*
+    config/*
+    migrations/*
+    recipe/__init__.py
+    seeds/*
+    tests/*
+    env/*
+    main.py
+
+[html]
+directory = coverage

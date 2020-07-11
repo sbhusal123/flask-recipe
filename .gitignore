@@ -1,7 +1,17 @@
-env/
+# Editoes and IDE files
+.vscode/
+.idea
 
+# Python specific files
+env/
 *.pyc
 
-.vscode/
-
+# static files
 /recipe/static/uploads/*
+
+# Test database
+sqlite.db
+
+# Coverage
+.coverage
+coverage/

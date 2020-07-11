@@ -1,6 +1,9 @@
 from recipe.models.recipe import Recipe
 
 from orator.exceptions.orm import ModelNotFound
+ 
+import PIL.Image
+import tempfile
 
 from functools import wraps
 import pathlib
@@ -25,3 +28,10 @@ def unique_file_name(filename):
     ext = filename.split('.')[-1]
     filename = f'{uuid.uuid4()}.{ext}'
     return filename
+
+def create_test_image():
+    """Generate temporary test image file"""
+    image = PIL.Image.new('RGB', size=(100, 100))
+    file = tempfile.NamedTemporaryFile(suffix='.jpg')
+    image.save(file)
+    return file

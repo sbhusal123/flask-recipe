@@ -12,7 +12,8 @@ ROOT_DIR =os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
 # Get config file
-config_file = os.getcwd() + "/config/development.cfg"
+config = os.environ['CONFIG']
+config_file = os.getcwd() + config
 
 """Setup and config Flask app from config file"""
 app = Flask(__name__, instance_relative_config=True)

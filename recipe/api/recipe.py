@@ -37,8 +37,7 @@ class RecipeListApi(Resource):
         try:
             recipe = Recipe.create(data, image=image_filename)
         except QueryException as qe:
-            error_message = qe.message.split("\n")[1]
-            return {'message': 'Recipe creation error', 'error': error_message}, 422
+            return {'message': 'Recipe creation error'}, 422
         return {'data': recipe.serialize(), 'message': 'New recipe added succesfully.'}, 201
         
 

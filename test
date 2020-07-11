@@ -1,0 +1,6 @@
+export CONFIG=/config/test.cfg
+
+python db.py migrate
+coverage run -m unittest
+coverage html
+python db.py migrate:rollback

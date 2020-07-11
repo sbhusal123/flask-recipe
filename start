@@ -1,4 +1,5 @@
 #!/bin/bash
 export FLASK_APP=recipe
 export FLASK_ENV=development
+export CONFIG=/config/development.cfg
 python main.py
