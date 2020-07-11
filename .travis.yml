@@ -2,8 +2,10 @@ language: python
 python:
   - "3.8"
 install:
-  - pip install -r requirements.txt
+  - pip install -r test_requirements.txt
 before-script:
-  - sudo chmod +x test
+  - pip install --upgrade orator
+  - cd recipe
+  - sudo chmod +x travis_test
 script:
-  - ./test
+  - ./travis_test

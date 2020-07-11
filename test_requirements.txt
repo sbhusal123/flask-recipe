@@ -1,0 +1,11 @@
+bcrypt
+coverage
+cryptography
+cleo
+Flask
+Flask-Login
+flask-orator
+Flask-RESTful
+orator
+Pillow
+PyJWT

@@ -1,4 +1,5 @@
 [run]
+source=.
 omit =
     coverage/*
     env/*
@@ -11,6 +12,7 @@ omit =
     tests/*
     env/*
     main.py
+    db.py
     auth_encryption/encryption.py
 
 [html]
