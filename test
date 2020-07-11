@@ -1,6 +1,10 @@
 export CONFIG=/config/test.cfg
 
 python db.py migrate
+
 coverage run -m unittest
+coverage report
 coverage html
+google-chrome coverage/index.html
+
 python db.py migrate:rollback
