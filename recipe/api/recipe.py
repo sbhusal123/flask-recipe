@@ -1,9 +1,10 @@
 from flask import Blueprint
 from flask_restful import Resource, Api, request
 
+from recipe import app
 from recipe.models.recipe import Recipe
 
-from helpers.utils import recipe_exists
+from helpers.utils import recipe_exists, unique_file_name
 from orator.exceptions.query import QueryException
 
 from auth_encryption.authentication import auth
@@ -11,7 +12,6 @@ from recipe.api.validators.recipe_validator import RecipeValidator
 
 from werkzeug.utils import secure_filename
 import os
-from recipe import app
 
 class RecipeListApi(Resource):
 
@@ -26,20 +26,19 @@ class RecipeListApi(Resource):
 
         # Upload files
         image = data.image
-        image_filename = secure_filename(image.filename)
+        image_filename = secure_filename(unique_file_name(image.filename))
         image_path = os.path.join(app.config['UPLOAD_FOLDER'], image_filename)
         try:
             image.save(image_path)
         except Exception as e:
-            print(e)
-            print(image_path)
             return {'message': 'Unale to upload file.'}, 422
         data.pop('image')
 
         try:
             recipe = Recipe.create(data, image=image_filename)
         except QueryException as qe:
-            return {'message': 'Recipe creation error'}, 422
+            error_message = qe.message.split("\n")[1]
+            return {'message': 'Recipe creation error', 'error': error_message}, 422
         return {'data': recipe.serialize(), 'message': 'New recipe added succesfully.'}, 201
         
 
