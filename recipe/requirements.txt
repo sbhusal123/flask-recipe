@@ -16,7 +16,7 @@ flask-orator==0.2.0
 Flask-RESTful==0.3.8
 inflection==0.3.1
 itsdangerous==1.1.0
-Jinja2==2.11.2
+Jinja2==2.11.3
 lazy-object-proxy==1.5.0
 MarkupSafe==1.1.1
 orator==0.9.9
